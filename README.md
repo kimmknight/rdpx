@@ -18,11 +18,11 @@ It is currently in the early stages of development. Check the Issues page to see
 ### Features
 
 * Create and manage RemoteApps on Windows desktops and servers
-* A web interface for your RemoteApps
+* A web interface to access and manage your RemoteApps
 * Webfeed that Windows and mobile app clients can "subscribe" to
-  * Lists RemoteApps in client Start menu
+  * Lists RemoteApps in Windows client Start menu
   * Lists RemoteApps in the mobile app
-* Authentication
+* Authentication (Windows username/password)
 
 
 
@@ -34,7 +34,7 @@ A ***supported*** edition of Windows XP, 7, 8, 10, or Server. See the [compatibi
 
 ### Downloads
 
-There will be a release shortly. For the moment, grab the source.
+There will be a release shortly. For the moment, grab [the source](https://github.com/kimmknight/rdpx/archive/refs/heads/main.zip).
 
 
 
@@ -42,11 +42,11 @@ There will be a release shortly. For the moment, grab the source.
 
 Install rdpx. Go to your Start Menu and run it from there. If you are running from source, run **server.py**.
 
-Once running, open a web browser and navigate to: http://127.0.0.1:8080/
+Once running, open a web browser and navigate to: [http://127.0.0.1:8080/](http://127.0.0.1:8080/)
 
-You will be prompted for a username and password. Enter a Windows username and password.
+Enter a Windows username and password when prompted.
 
-Once you are in, click the **New RemoteApp** button. Enter the name and path of the desired app, then click **Save**.
+Click the **New RemoteApp** button. Enter the name and path of the desired app, then click **Save**.
 
 You are now ready to access your app(s) from another computer!
 
@@ -59,12 +59,12 @@ Open a browser and navigate to http://x.x.x.x:8080/ (replace x.x.x.x with the ho
 
 **Note:** You may need to open a firewall port (TCP/8080 by default) on the host before you can access rdpx from another computer on your network.
 
-You can **change the TCP port** that rdpx uses from 8080 to something else in Settings > Web Interface
+You can **change the TCP port** that rdpx uses from **8080** to something else in **Settings > Web Interface**.
 
 To allow **remote access from the internet**, there are a few options:
 
 * Set up a VPN server to allow secure remote access into your network
-  (DIY setup is a little involved. Alternatively, you could use a service like [Hamachi](https://www.vpn.net/))
+  (DIY setup is a little involved. Alternatively, you could use a service like [Hamachi](https://www.vpn.net/) - free for up to 5 devices)
 
 * Use a Remote Desktop Gateway server
   (requires Windows Server)
@@ -90,8 +90,8 @@ Webfeed requires HTTPS to work properly. Windows clients require a valid certifi
 
 ### Adding HTTPS
 
-You can add HTTPS support using it for NGINX for Windows.
+You can add HTTPS support using [NGINX for Windows](https://github.com/kimmknight/rdpx/archive/refs/heads/main.zip).
 
-Copy the files provided in the rdpx **nginxconf** folder into NGINX's **conf** folder.
+Copy the files provided in the rdpx **nginxconf** folder into NGINX's **conf** folder (overwrite).
 
 Replace the certificate/key files with your own if you need a valid certificate.
