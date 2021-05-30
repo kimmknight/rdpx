@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RemoteApps</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="icon" type="image/png" href="img/icon.png">
+
+    <link href="includes/material-icons.css" rel="stylesheet">
+    <link href="includes/w3.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/filepicker.css">
+    <script src="includes/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- LOAD REQUIRED SCRIPTS-->
+
+    <script src="js/rdpfile.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/uievents.js"></script>
+    <script src="js/base64.js"></script>
+    <script src="js/winver.js"></script>
+
+    <!-- END LOAD REQUIRED SCRIPTS-->
+
+
+    <!-- BEGIN LOADER -->
+
+    <div id="loader" class="loader"></div>
+
+    <!-- END LOADER -->
+
+
+    <!-- BEGIN OS EDITION ALERT -->
+
+    <div id="winvercontainer" class="w3-container w3-hide">
+        <div class="w3-panel w3-round w3-border w3-khaki" style="position: relative;">
+            <span class="w3-button w3-display-topright w3-hover-khaki" onclick="clickcancelwinverbutton(this)">&times;</span>
+            <h3>Unsupported Windows Edition</h3>
+            <p>An unsupported edition of Windows (<span id="winedition"></span>) has been detected on the host. RemoteApps will not work on this host.</p>
+        </div>
+    </div>
+    
+    <!-- END OS EDITION ALERT -->
+
+
+    <!-- BEGIN MAIN AREA (CARDS/BUTTONS) -->
+    
+    <div id="bodycontent" class="flex-container w3-container"></div>
+
+    <!-- END MAIN AREA (CARDS/BUTTONS) -->
+
+    
+    <!-- BEGIN SETTINGS MODAL -->
+
+    <div id="settingsmodal" class="w3-modal w3-animate-opacity">
+        <div class="w3-modal-content">
+            <header class="w3-container w3-light-grey">
+                <h2>Settings</h2>
+            </header>
+            <div class="w3-bar w3-light-grey">
+                <button class="w3-bar-item w3-button settingstablink w3-dark-grey"
+                    onclick="clickhostsettingstab(event)">Host</button>
+                <button class="w3-bar-item w3-button settingstablink"
+                    onclick="clickgatewaysettingstab(event)">Gateway</button>
+                    <button class="w3-bar-item w3-button settingstablink"
+                    onclick="clickwebinterfacesettingstab(event)">Web Interface</button>
+            </div>
+            <div class="w3-container w3-padding-16">
+
+                <div id="Server" class="settingstab">
+                    <div class="w3-container w3-margin-bottom">
+                        <input id="rdpenabled" class="w3-check" type="checkbox">
+                        <label>Remote Desktop enabled on host</label>
+                    </div>
+                    <div class="w3-container w3-margin-bottom">
+                        <input id="useurladdress" class="w3-check" type="checkbox" onclick="clickautomaticaddresstoggle(this)" checked="checked">
+                        <label>Automatic host address (from URL)</label>
+                    </div>
+                    <div class="w3-container w3-twothird">
+                        <label>Host address</label>
+                        <input id="fulladdress" class="w3-input w3-border" type="text">
+                    </div>
+                    <div class="w3-container w3-third w3-margin-bottom">
+                        <label>Port</label>
+                        <input id="serverport" class="w3-input w3-border" type="number">
+                    </div>
+                    <div class="w3-container w3-margin-bottom">
+                        <label>Alternative host address</label>
+                        <input id="altfulladdress" class="w3-input w3-border" type="text">
+                    </div>
+                </div>
+
+                <div id="Gateway" class="settingstab" style="display:none">
+                    <div class="w3-container w3-margin-bottom">
+                        <input id="gatewayuse" class="w3-check" type="checkbox">
+                        <label>Use RD gateway</label>
+                    </div>
+
+                    <div class="w3-container w3-margin-bottom">
+                        <input id="gatewayauto" class="w3-check" type="checkbox">
+                        <label>Try direct connection before using gateway</label>
+                    </div>
+
+                    <div class="w3-container w3-margin-bottom">
+                        <label>Gateway address</label>
+                        <input id="gatewayaddress" class="w3-input w3-border" type="text">
+                    </div>
+                </div>
+
+                <div id="WebInterface" class="settingstab" style="display:none">
+                    <div class="w3-container w3-margin-bottom">
+                        <input id="webfeedenabled" class="w3-check" type="checkbox">
+                        <label>Webfeed enabled</label>
+                        <p class="w3-small">Allows publishing of RemoteApps to the client's Start menu, or to the Microsoft Remote Desktop mobile app. Webfeed is accessible without authentication.</p>
+                    </div>
+                    <div class="w3-container w3-margin-bottom">
+                        <label>Web Interface Port</label>
+                        <input id="webinterfaceport" class="w3-input w3-border" type="number">
+                        <p class="w3-small">* The web interface must be restarted for this change to take effect.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="w3-container w3-padding-16 w3-light-grey">
+                <button class="w3-button w3-round w3-white w3-border"
+                    onclick="clicksavesettingsbutton()">
+                    Save
+                </button>
+                <button class="w3-button w3-round w3-white w3-border"
+                    onclick="clickcancelsettingsbutton()">
+                    Cancel
+                </button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- END SETTINGS MODAL -->
+
+
+    <!-- BEGIN PROPERTIES MODAL -->
+
+    <div id="propertiesmodal" class="w3-modal w3-animate-opacity">
+        <div class="w3-modal-content">
+            
+            <header class="w3-container w3-light-grey">
+                <div class="propertiesheaderdiv">
+                    <div>
+                        <h2>Properties</h2>
+                    </div>
+                    <div>
+                        <input id="advancedcheck" class="w3-check" type="checkbox" onchange="clickadvancedpropertiestoggle(this)">
+                        <label>Advanced</label>
+                    </div>
+                </div>
+            </header>
+
+            <div class="w3-bar w3-light-grey">
+                <button id="propertiesmain" class="w3-bar-item w3-button propertiestablink w3-dark-grey"
+                    onclick="clickapplicationpropertiestab(event)">Application</button>
+                <div class="advancedproperties">
+                    <button class="w3-bar-item w3-button propertiestablink"
+                        onclick="clickiconpropertiestab(event)">Icon</button>
+                    <button class="w3-bar-item w3-button propertiestablink"
+                        onclick="clickcommandlinepropertiestab(event)">Command-line</button>
+                </div>
+            </div>
+
+            <div class="w3-container w3-padding-16">
+
+                <div id="Application" class="propertiestab">
+                    <div class="w3-container" hidden>
+                        <label>Original name</label>
+                        <input id="originalappid" class="w3-input w3-border w3-margin-bottom" type="text" disabled>
+                    </div>
+                    <div class="w3-container">
+                        <label>Name</label>
+                        <input id="fullname" class="w3-input w3-border w3-margin-bottom" type="text">
+                    </div>
+                    <div class="w3-container advancedproperties">
+                        <label>ID</label>
+                        <input id="appid" class="w3-input w3-border w3-margin-bottom" type="text">
+                    </div>
+                    <div class="w3-container">
+                        <div class="propsflex">
+                            <div class="wideitem">
+                                <label>Path</label>
+                                <input id="path" class="w3-input w3-border w3-margin-bottom" type="text">
+                            </div>
+                            <div class="narrowitem">
+                                <button id="pathfilepickerbutton" class="w3-button" onclick="clickbrowsepathbutton()">
+                                    <i class="material-icons">drive_file_move</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3-container">
+                        <div><label>Image</label></div>
+                        <div class="w3-margin-bottom imageselector">
+                            <div class="smallappimgdiv w3-border w3-round w3-light-grey">
+                                <img id="smallappimg" src="img/apppicture.png" class="appimg">
+                            </div>
+                            <div class="w3-margin-left">
+                                <button class="w3-button w3-round w3-white w3-border" onclick="clickimagebrowsebutton()">Browse...</button>
+                                <button class="w3-button w3-round w3-white w3-border" onclick="clickimageresetbutton()">Reset</button>
+                                <div class="w3-tooltip">
+                                    <button class="w3-button w3-round w3-blue w3-border w3-margin-left" onclick="clickimagesearchbutton()">
+                                        <span class="material-icons w3-large">
+                                            image_search
+                                        </span>
+                                    </button>
+                                    <span class="w3-text w3-tag">
+                                        Image search
+                                    </span>
+                                </div>
+                                <div class="w3-tooltip">
+                                    <button class="w3-button w3-round w3-white w3-border" onclick="clickpastebase64button()">
+                                        <span class="material-icons w3-large">
+                                            content_paste
+                                        </span>
+                                    </button>
+                                    <span class="w3-text w3-tag">
+                                        Paste base64
+                                    </span>
+                                </div>
+                                
+                                <input class="w3-dark-grey" id="imageselectorinput" type="file" onchange="encodeimagefromfile(this)" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="advancedproperties">
+                            <label>Image data</label>
+                            <input id="imagesrc" class="w3-input w3-border" type="text" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Icon" class="propertiestab" style="display:none">
+                    <div class="w3-container">
+                        <div class="propsflex">
+                            <div class="wideitem">
+                                <label>Icon path</label>
+                                <input id="iconpath" class="w3-input w3-border w3-margin-bottom" type="text">
+                            </div>
+                            <div class="narrowitem">
+                                <button id="pathfilepickerbutton" class="w3-button" onclick="clickbrowseiconbutton()">
+                                    <i class="material-icons">drive_file_move</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w3-container">
+                        <label>Icon index</label>
+                        <input id="iconindex" class="w3-input w3-border w3-margin-bottom smalltextbox" type="number">
+                    </div>
+                </div>
+
+                <div id="Command-line" class="propertiestab" style="display:none">
+                    <div class="w3-container w3-margin-bottom">
+                        <p>
+                            <input id="cmdlineoptional" class="w3-radio" type="radio" name="cmdlineoption" value="1" checked>
+                            <label>Optional</label>
+                        </p>
+                        <p>
+                            <input id="cmdlinedisabled" class="w3-radio" type="radio" name="cmdlineoption" value="0">
+                            <label>Disabled</label>
+                        </p>
+                        <p>
+                            <input id="cmdlineenforced" class="w3-radio" type="radio" name="cmdlineoption" value="2">
+                            <label>Enforced</label>
+                        </p>
+                    </div>
+                    <div class="w3-container">
+                        <label>Command line parameters</label>
+                        <input id="cmdlineparameters" class="w3-input w3-border w3-margin-bottom" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <footer class="w3-container w3-padding-16 w3-light-grey">
+                <button class="w3-button w3-round w3-white w3-border"
+                    onclick="clicksavepropertiesbutton()">
+                    Save
+                </button>
+                <button class="w3-button w3-round w3-red w3-border"
+                    onclick="clickdeleteremoteappbutton()">
+                    Delete
+                </button>
+                <button class="w3-button w3-round w3-white w3-border"
+                    onclick="clickcancelpropertiesbutton()">
+                    Cancel
+                </button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- END PROPERTIES MODAL -->
+
+
+    <!-- BEGIN FILEPICKER MODAL -->
+
+    <div id="filepickermodal" class="w3-modal">
+        <div class="w3-modal-content">
+
+            <header class="w3-container w3-light-grey">
+                <div class="propertiesheaderdiv">
+                    <div>
+                        <h2>Select a file</h2>
+                    </div>
+                    <div>
+                        <input id="allfiletypescheck" class="w3-check" type="checkbox" onchange="toggleallfiletypes(this)">
+                        <label>Show all</label>
+                    </div>
+                </div>
+            </header>
+
+            <div class="w3-container w3-padding-16">
+                <script src="js/filepicker.js"></script>
+                <div id="filepicker" class="filepicker"></div>
+            </div>
+
+            <footer class="w3-container w3-padding-16 w3-light-grey">
+                <button class="w3-button w3-round w3-white w3-border"
+                    onclick="clickcancelfilepickerbutton()">
+                    Cancel
+                </button>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- END FILEPICKER MODAL -->
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+.filepickerfile {
+    background-color: rgb(240, 240, 240);
+}
+
+.filepickeritem {
+    padding: 10px;
+    border: 1px grey solid;
+    border-radius: 3px;
+    margin: 2px;
+    background-color: #fbfbfb;
+}
+
+.pathheading {
+    font-weight: 600;
+    background-color: #3e3e3e;
+    color: white;
+}
+
+.filepicker {
+    max-height: 50vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+i {
+    vertical-align: middle;
+    margin-right: 0.3em;
+}

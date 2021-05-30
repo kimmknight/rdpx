@@ -1,0 +1,135 @@
+body, h1, h2, h3, h4, h5, h6 {
+    font-family: Tahoma, "Trebuchet MS", sans-serif;
+}
+
+.appcard {
+    background-color: #f6f6f6;
+    width: 12em;
+    height: 12em;
+    min-width: 12em;
+    min-height: 12em;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+}
+
+.appcard:hover {
+    background-color: white;
+}
+
+.appimg {
+    height: 100%;
+}
+
+.appimgdiv {
+    width: auto;
+    height: 67%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    margin-bottom:7px;
+}
+
+.imageselector {
+    display: flex;
+    align-items: center;
+}
+
+.smallappimgdiv {
+    width: 100px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    min-width: 100px;
+}
+
+.icon {
+    text-shadow: 4px 4px 5px rgb(0 0 0 / 20%);
+}
+
+.addicon {
+    color: #4caf50;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.settingsicon {
+    position: absolute;
+    top: 2px;
+    right: 26px;
+    color: lightgrey;
+}
+
+.imgdown {
+    margin-top: 10%;
+}
+
+.propertiesheaderdiv {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.propsflex {
+    display: flex;
+}
+
+.wideitem {
+    width: 100%;
+}
+
+.narrowitem {
+    align-self: center;
+}
+
+.smalltextbox {
+    width: 12ch !important;
+}
+
+.note {
+    position: absolute;
+    z-index: 2;
+    right: 0px;
+}
+
+.loader {
+    display: none;
+    position: fixed;
+    right: 0;
+    margin: 4px;
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #999999;
+    width: 1.5em;
+    height: 1.5em;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin .5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.w3-tooltip {
+    display: contents;
+}
+
+.w3-text {
+    position: absolute;
+}

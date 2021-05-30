@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResourceCollection xmlns="http://schemas.microsoft.com/ts/2007/05/tswf" PubDate="${currentdatetime}" SchemaVersion="1.1">
+   <Publisher LastUpdated="${currentdatetime}" Name="${hostname}" ID="${hostname}" Description="">
+      <Resources>

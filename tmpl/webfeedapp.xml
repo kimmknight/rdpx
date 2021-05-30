@@ -1,0 +1,13 @@
+        <Resource ID="${appid}" Alias="${appid}" Title="${appname}" LastUpdated="${filedatetime}" Type="RemoteApp">
+            <Icons>
+               <IconRaw FileType="Ico" FileURL="${appiconico}" />
+               <Icon32 Dimensions="32x32" FileType="Png" FileURL="${appicon32png}" />
+            </Icons>
+            <FileExtensions />
+            <HostingTerminalServers>
+               <HostingTerminalServer>
+                  <ResourceFile FileExtension=".rdp" URL="${apprdpfile}" />
+                  <TerminalServerRef Ref="${hostname}" />
+               </HostingTerminalServer>
+            </HostingTerminalServers>
+        </Resource>

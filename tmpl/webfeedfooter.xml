@@ -1,0 +1,6 @@
+      </Resources>
+      <TerminalServers>
+         <TerminalServer ID="${hostname}" Name="${hostname}" LastUpdated="${currentdatetime}" />
+      </TerminalServers>
+   </Publisher>
+</ResourceCollection>

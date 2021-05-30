@@ -1,0 +1,13 @@
+        <Resource ID="fulldesktop" Alias="fulldesktop" Title="Full Desktop Session" LastUpdated="${fulldesktopfiledatetime}" Type="Desktop">
+            <Icons>
+               <IconRaw FileType="Ico" FileURL="img/desktop.ico" />
+               <Icon32 Dimensions="32x32" FileType="Png" FileURL="img/desktop32.png" />
+            </Icons>
+            <FileExtensions />
+            <HostingTerminalServers>
+               <HostingTerminalServer>
+                  <ResourceFile FileExtension=".rdp" URL="${fulldesktoprdpfile}" />
+                  <TerminalServerRef Ref="${hostname}" />
+               </HostingTerminalServer>
+            </HostingTerminalServers>
+         </Resource>
