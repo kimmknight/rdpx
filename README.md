@@ -11,18 +11,19 @@ It is currently in the early stages of development. Check the Issues page to see
 
 ### Screenshots
 
-![](docimg/rdpx-desktop.png) ![](docimg/rdpx-android.png)
+![](docimg/rdpx-desktop.png)![](docimg/rdpx-android.png)
+![](docimg/radc-win10start.png)
 
 
 
 ### Features
 
-* Create and manage RemoteApps on Windows desktops and servers
-* A web interface to access and manage your RemoteApps
-* Webfeed that Windows and mobile app clients can "subscribe" to
-  * Lists RemoteApps in Windows client Start menu
-  * Lists RemoteApps in the mobile app
-* Authentication (Windows username/password)
+* Create and manage RemoteApps on Windows desktops and servers.
+* A web interface to access your RemoteApps.
+* Webfeed that Windows and mobile app clients can subscribe to.
+  * Lists available RemoteApps in Windows clients' Start menu.
+  * Lists available RemoteApps in the mobile app.
+* Authentication (Windows credentials).
 
 
 
@@ -34,7 +35,7 @@ A ***supported*** edition of Windows XP, 7, 8, 10, or Server. See the [compatibi
 
 ### Downloads
 
-There will be a release shortly. For the moment, grab [the source](https://github.com/kimmknight/rdpx/archive/refs/heads/main.zip).
+There will be a release shortly. For the moment, grab the source.
 
 
 
@@ -42,7 +43,7 @@ There will be a release shortly. For the moment, grab [the source](https://githu
 
 Install rdpx. Go to your Start Menu and run it from there. If you are running from source, run **server.py**.
 
-Once running, open a web browser and navigate to: [http://127.0.0.1:8080/](http://127.0.0.1:8080/)
+Once running, open a web browser and navigate to: http://127.0.0.1:8080/
 
 Enter a Windows username and password when prompted.
 
@@ -63,35 +64,40 @@ You can **change the TCP port** that rdpx uses from **8080** to something else i
 
 To allow **remote access from the internet**, there are a few options:
 
-* Set up a VPN server to allow secure remote access into your network
-  (DIY setup is a little involved. Alternatively, you could use a service like [Hamachi](https://www.vpn.net/) - free for up to 5 devices)
+* Set up a VPN server to allow secure remote access into your network.
+  DIY setup is a little involved. Alternatively, you could use a service like [Hamachi](https://www.vpn.net/) - free for up to 5 devices.
 
-* Use a Remote Desktop Gateway server
-  (requires Windows Server)
+* Use a Remote Desktop Gateway server.
+  Requires Windows Server.
 
-* On your router, port-forward TCP/8080 and TCP/3389 to running rdpx
-  **(extreme security risk, do not actually do this)**
+* On your router, port-forward TCP/8080 and TCP/3389 to running rdpx.
+  **Extreme security risk, do not actually do this.**
 
   
 
 ### Webfeed
 
-The Webfeed feature allows Windows and mobile app clients to "subscribe" to rdpx's RemoteApps.
+The Webfeed feature allows Windows and mobile app clients to subscribe to rdpx's RemoteApps.
 
-For Windows clients, it will keep an up-to-date list of RemoteApps in the clients' Start Menu.
+* For Windows clients, it will keep an up-to-date list of RemoteApps in the clients' Start Menu.
+  Configure in **RemoteApp and Desktop Connections**.
+* For mobile app clients, it provides an up-to-date list of RemoteApps directly in the app.
+  In the **Microsoft Remote Desktop** app, click the + and add a **Remote Resource Feed**.
 
-For mobile app clients, it provides an up-to-date list of RemoteApps directly in the app.
+You can enable Webfeed in **Settings > Web Interface**. You should also set the server address manually in **Settings > Host**.
 
-You can enable Webfeed in Settings > Web Interface. You should also set the server address manually.
+The Webfeed can be accessed using the url: https://x.x.x.x/webfeed
 
-Webfeed requires HTTPS to work properly. Windows clients require a valid certificate whereas mobile clients can ignore the certificate.
+Webfeed requires HTTPS to work properly. Windows clients require a valid certificate whereas mobile clients can choose to ignore the certificate.
 
 
 
 ### Adding HTTPS
 
-You can add HTTPS support using [NGINX for Windows](https://github.com/kimmknight/rdpx/archive/refs/heads/main.zip).
+You can add HTTPS support using NGINX for Windows.
 
-Copy the files provided in the rdpx **nginxconf** folder into NGINX's **conf** folder (overwrite).
+Copy the files provided in the rdpx **nginxconf** folder into NGINX's **conf** folder.
 
 Replace the certificate/key files with your own if you need a valid certificate.
+
+More information can be found in [README.md](nginxconf/README.md) in the nginxconf folder.
