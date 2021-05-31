@@ -35,13 +35,13 @@ A ***supported*** edition of Windows XP, 7, 8, 10, or Server. See the [compatibi
 
 ### Downloads
 
-There will be a release shortly. For the moment, grab the source.
+[Lastest zip (v0.3.8.0) ](https://github.com/kimmknight/rdpx/releases/download/v0.3.8.0/rdpx.v0380.zip)
 
 
 
 ### Getting started
 
-Install rdpx. Go to your Start Menu and run it from there. If you are running from source, open **Run server.bat**.
+Install rdpx. Go to your Start Menu and run it from there. If you are running from source, run **server.py**.
 
 Once running, open a web browser and navigate to: http://127.0.0.1:8080/
 
