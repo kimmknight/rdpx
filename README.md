@@ -41,7 +41,7 @@ There will be a release shortly. For the moment, grab the source.
 
 ### Getting started
 
-Install rdpx. Go to your Start Menu and run it from there. If you are running from source, run **server.py**.
+Install rdpx. Go to your Start Menu and run it from there. If you are running from source, open **Run server.bat**.
 
 Once running, open a web browser and navigate to: http://127.0.0.1:8080/
 
