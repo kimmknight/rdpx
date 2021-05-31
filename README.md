@@ -41,7 +41,7 @@ A ***supported*** edition of Windows XP, 7, 8, 10, or Server. See the [compatibi
 
 ### Getting started
 
-Install rdpx. Go to your Start Menu and run it from there. If you are running from source, run **server.py**.
+Install rdpx. Go to your Start Menu and run it from there. If you are running from source, run **Run server.bat**.
 
 Once running, open a web browser and navigate to: http://127.0.0.1:8080/
 
