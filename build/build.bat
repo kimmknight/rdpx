@@ -20,4 +20,4 @@ robocopy /E /Z /B /XO /NP nginxconf dist\nginxconf
 robocopy /E /Z /B /XO /NP tmpl dist\tmpl
 
 copy /Y README.md dist\
-
+copy /Y LICENSE dist\
