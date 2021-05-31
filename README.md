@@ -70,7 +70,7 @@ To allow **remote access from the internet**, there are a few options:
 * Use a Remote Desktop Gateway server.
   Requires Windows Server.
 
-* On your router, port-forward TCP/8080 and TCP/3389 to running rdpx.
+* On your router, port-forward TCP/8080 and TCP/3389 to the host running rdpx.
   **Extreme security risk, do not actually do this.**
 
   
